@@ -60,7 +60,8 @@ first we need to know sensible API Endpoints, and then when implement its should
 ### RESTful routes
 you can read about [routes](https://laravel.com/docs/11.x/routing) from laravel documintaion
 
-** basic routes **
+**basic routes**
+in web.php
 ``` 
 use Illuminate\Support\Facades\Route;
  
@@ -68,3 +69,13 @@ Route::get('/greeting', function () {
     return 'Hello World';
 });
 ```
+
+then in the browser
+
+![image](https://github.com/user-attachments/assets/e92a7c20-90e0-442f-894d-8a39016f8b36)
+
+now if your application will also offer a stateless API, you may enable API routing using the install:api Artisan command:
+```
+php artisan install:api
+```
+the install:api command creates the routes/api.php file
