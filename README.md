@@ -25,6 +25,8 @@ RESTful Services provide uniform, standardized access with clear request require
 - Postman
 
 ## Setting Laravel Up
+
+I've used this [article](https://blog.devgenius.io/laravel-11-breeze-auth-api-adding-an-api-route-to-laravel-11-project-f8c4e68e650a) to setup laravel with breeze and API's 
 1. Create a Laravel project with Composer:
     ```bash
     composer create-project laravel/laravel PROJECT_FOLDER
@@ -41,6 +43,21 @@ DB_USERNAME=your_username
 DB_PASSWORD=your_password
 ```
 
+```
+composer require laravel/breeze:2.0.0
+php artisan breeze:install
+```
+Specify the following settings:
+
+Blade stack
+No for dark mode support
+1 for PHPUnit testing framework
+
+then
+
+```
+php artisan migrate
+```
 ## Deriving API Endpoints
 you can read 
 [Decomposition of Microservices Architecture](https://medium.com/design-microservices-architecture-with-patterns/decomposition-of-microservices-architecture-c8e8cec453e) article, to learn how to Decompose Microservices into Microservices Architecture.
@@ -74,6 +91,79 @@ then in the browser
 
 ![image](https://github.com/user-attachments/assets/e92a7c20-90e0-442f-894d-8a39016f8b36)
 
+```
+php artisan make:controller Api/AuthController
+```
+then edit as follows:
+
+(file →app\Http\Controllers\Api\AuthController.php)
+
+```
+<?php
+/* app\Http\Controllers\Api\AuthController.php */
+namespace App\Http\Controllers\Api;
+use App\Models\User;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rules;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Auth\Events\Registered;
+class AuthController extends Controller
+{
+    //
+    public function register(Request $request): JsonResponse
+    {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ]);
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+        event(new Registered($user));
+        $created_user= User::where('email', '=', $request->email)->first();
+        return response()->json([
+            'user'=>$created_user,
+            'stus'=>'registered',
+            'verified'=>false], 200);  
+    }
+    public function login(Request $request)
+    {
+        if (!Auth::attempt($request->only("email", "password"))) {
+            return response()->json(
+                [
+                    "user" => Null,
+                    "message" => "Invalid login details",
+                    "stus" => "failed",
+                ],
+                200
+            );
+        }
+        $user = User::where("email", $request["email"])->firstOrFail();
+        $user_loggedin=[
+            'id' => $user->id,
+            'email' => $user->email,
+            'email_verified_at'=>  $user->email_verified_at, 
+            'stus'=>'loggedin'
+        ];
+        if ($user->email_verified_at != Null) 
+            $token = $user->createToken("auth_token")->plainTextToken;
+            $user_loggedin['user_token']= $token;
+            $user_loggedin['token_type']= 'Bearer';
+
+        return response()->json(
+            $user_loggedin,
+            200
+        );
+    }
+}
+```
 now if your application will also offer a stateless API, you may enable API routing using the install:api Artisan command:
 ```
 php artisan install:api
