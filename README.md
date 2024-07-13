@@ -4,6 +4,7 @@
 1. [Introduction](#introduction)
 2. [Requirements](#requirements)
 3. [Setting Laravel Up](#setting-laravel-up)
+4. [Deriving API Endpoints](#deriving-api-endpoints)
 
 ## Introduction
 This repository contains the code and resources for learning RESTful Web Services with PHP and Laravel. It covers the creation and management of RESTful APIs using Laravel.
@@ -39,4 +40,16 @@ DB_USERNAME=your_username
 DB_PASSWORD=your_password
 ```
 
-3. for production [Adds CORS (Cross-Origin Resource Sharing) headers support in your Laravel application]( https://laravel-news.com/package/barryvdh-laravel-cors)
+## Deriving API Endpoints
+you can read 
+[Decomposition of Microservices Architecture](https://medium.com/design-microservices-architecture-with-patterns/decomposition-of-microservices-architecture-c8e8cec453e) article, to learn how to Decompose Microservices into Microservices Architecture.
+
+### Main HTTP Methods
+- GET: GET data from db
+- POST: INSERT data into db
+- PUT: UPDATE data in db by overwriting old record
+- PATCH: UPDATE data in db by overwriting fields of old record
+- DELETE: DELETE data in db
+  
+### Protect routes
+first we need to know sensible API Endpoints, and then when implement its should be authenticated.
