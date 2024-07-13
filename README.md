@@ -5,6 +5,7 @@
 2. [Requirements](#requirements)
 3. [Setting Laravel Up](#setting-laravel-up)
 4. [Deriving API Endpoints](#deriving-api-endpoints)
+5. [Routing](#routing)
 
 ## Introduction
 This repository contains the code and resources for learning RESTful Web Services with PHP and Laravel. It covers the creation and management of RESTful APIs using Laravel.
@@ -53,3 +54,17 @@ you can read
   
 ### Protect routes
 first we need to know sensible API Endpoints, and then when implement its should be authenticated.
+
+## Routing
+
+### RESTful routes
+you can read about [routes](https://laravel.com/docs/11.x/routing) from laravel documintaion
+
+** basic routes **
+``` 
+use Illuminate\Support\Facades\Route;
+ 
+Route::get('/greeting', function () {
+    return 'Hello World';
+});
+```
