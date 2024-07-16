@@ -5,9 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Meeting extends Model
+class Registraion extends Model
 {
     use HasFactory;
-    protected $table = 'meetings';
-    protected $fillable = ['title', 'description', 'date', 'time', 'user_id'];
 }
