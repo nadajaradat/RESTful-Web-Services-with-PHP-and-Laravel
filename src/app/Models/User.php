@@ -33,6 +33,15 @@ class User extends Authenticatable
     ];
 
     /**
+     * Get the registrations for the user.
+     */
+    public function registrations()
+    {
+        return $this->hasMany(Registraion::class);
+    }
+
+
+    /**
      * Get the attributes that should be cast.
      *
      * @return array<string, string>

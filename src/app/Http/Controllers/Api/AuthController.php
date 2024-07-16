@@ -64,4 +64,12 @@ class AuthController extends Controller
             200
         );
     }
+    public function logout(Request $request): JsonResponse
+    {
+        $request->user()->currentAccessToken()->delete();
+        return response()->json([
+            'message' => 'Logged out',
+            'stus' => 'loggedout'
+        ], 200);
+    }
 }
