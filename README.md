@@ -6,6 +6,8 @@
 3. [Setting Laravel Up](#setting-laravel-up)
 4. [Deriving API Endpoints](#deriving-api-endpoints)
 5. [Routing](#routing)
+6. [Request handling and responses](#request-handling-and-responses)
+7. [Api's Documentation](https://documenter.getpostman.com/view/33872204/2sA3kRHiRd#intro)
 
 ## Introduction
 This repository contains the code and resources for learning RESTful Web Services with PHP and Laravel. It covers the creation and management of RESTful APIs using Laravel.
@@ -176,3 +178,9 @@ to init controllers with models and policy
 php artisan make:controller MeetingController --resource --model=Meeting
 php artisan make:policy MeetingPolicy --model=Meeting
 ```
+
+## Request Handling And Responses
+this is the request response flow in laravel
+![image](https://github.com/user-attachments/assets/56ce8ca7-76e3-4dbe-910b-2fff7274dd46)
+
+
