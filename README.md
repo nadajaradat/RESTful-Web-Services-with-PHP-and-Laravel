@@ -7,6 +7,7 @@
 4. [Deriving API Endpoints](#deriving-api-endpoints)
 5. [Routing](#routing)
 6. [Request handling and responses](#request-handling-and-responses)
+7. [Api's Documentation](https://documenter.getpostman.com/view/33872204/2sA3kRHiRd#intro)
 
 ## Introduction
 This repository contains the code and resources for learning RESTful Web Services with PHP and Laravel. It covers the creation and management of RESTful APIs using Laravel.
