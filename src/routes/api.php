@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 // })->middleware('auth:sanctum');
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\MeetingController;
 
 // Registration route
 Route::post('/register', [AuthController::class, 'register']);
@@ -17,4 +18,10 @@ Route::post('/login', [AuthController::class, 'login']);
 
 Route::middleware('auth:sanctum')->get('/test', function (Request $request) {
     return response()->json(['message' => 'You are logged in!', $request->user()], 200);
+});
+
+// meeting routes
+
+Route::group(['middleware' => 'auth:sanctum'], function () {
+    Route::resource('meetings', MeetingController::class);
 });
