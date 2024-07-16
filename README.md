@@ -169,3 +169,10 @@ now if your application will also offer a stateless API, you may enable API rout
 php artisan install:api
 ```
 the install:api command creates the routes/api.php file
+
+
+to init controllers with models and policy
+```
+php artisan make:controller MeetingController --resource --model=Meeting
+php artisan make:policy MeetingPolicy --model=Meeting
+```
